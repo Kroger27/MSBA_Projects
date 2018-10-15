@@ -85,6 +85,19 @@ root <- Node$new("Z = 41.25 [X1 = 3.75, X2 = 2.25]")
 print(root)
 ```
 
+```{r}
+ip_df <- data.frame(
+  X=c(3.75,3,4,4.44,4,5),
+  Y=c(2.25, 3, 1.80, 1.00, 1.00, 1.00)
+)
+
+ip_df
+```
+
+```{r}
+plot(ip_df, main ="scatterplot", col="blue")
+```
+
 
 
 
