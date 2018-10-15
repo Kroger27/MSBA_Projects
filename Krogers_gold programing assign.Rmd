@@ -1,0 +1,79 @@
+---
+title: "Gold Programming and Visualization assignment"
+output: html_document
+---
+```{r}
+library("lpSolveAPI")
+x <- read.lp("inclass1.lp")
+x
+solve(x)
+get.objective(x)
+```
+
+```{r}
+get.variables(x)
+```
+```{r}
+solve(x)
+```
+```{r}
+get.constraints(x)
+```
+
+```{r}
+library("lpSolveAPI")
+y <- read.lp("inclass2.lp")
+y
+```
+```{r}
+get.objective (y)
+```
+```{r}
+solve(y)
+```
+```{r}
+get.constraints(y)
+```
+
+```{r}
+get.variables(y)
+```
+```{r}
+library("lpSolveAPI")
+z<- read.lp("inclass3.lp")
+z
+```
+
+```{r}
+solve (z)
+```
+```{r}
+get.objective(z)
+```
+```{r}
+get.variables(z)
+```
+```{r}
+get.constraints(z)
+```
+```{r}
+library("lpSolveAPI")
+w<- read.lp("inclass4.lp")
+w
+```
+
+```{r}
+solve (w)
+```
+
+```{r}
+get.objective(w)
+```
+
+```{r}
+get.variables(w)
+```
+
+```{r}
+get.constraints(w)
+```
