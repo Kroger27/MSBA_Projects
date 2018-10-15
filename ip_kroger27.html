@@ -142,52 +142,60 @@ solve(sp1)</code></pre>
 <pre class="r"><code>get.variables(sp1)</code></pre>
 <pre><code>## [1] 3.75 2.25</code></pre>
 <pre class="r"><code>sp2 &lt;- create.base.lp()
-add.constraint(sp2, c(1,0), &quot;&gt;=&quot;, 4)
+add.constraint(sp2, c(0,1), &quot;&gt;=&quot;, 3)
 solve(sp2)</code></pre>
 <pre><code>## [1] 0</code></pre>
 <pre class="r"><code>get.objective(sp2)</code></pre>
-<pre><code>## [1] 41</code></pre>
+<pre><code>## [1] 39</code></pre>
 <pre class="r"><code>get.variables(sp2)</code></pre>
-<pre><code>## [1] 4.0 1.8</code></pre>
-<p>//infeasible branch</p>
+<pre><code>## [1] 3 3</code></pre>
 <pre class="r"><code>sp3 &lt;- create.base.lp()
 add.constraint(sp3, c(1,0), &quot;&gt;=&quot;, 4)
-add.constraint(sp3, c(0,1), &quot;&gt;=&quot;,2)
 solve(sp3)</code></pre>
-<pre><code>## [1] 2</code></pre>
+<pre><code>## [1] 0</code></pre>
 <pre class="r"><code>get.objective(sp3)</code></pre>
-<pre><code>## [1] -1e+30</code></pre>
+<pre><code>## [1] 41</code></pre>
 <pre class="r"><code>get.variables(sp3)</code></pre>
-<pre><code>## [1]  0.000000e+00 6.942934e-310</code></pre>
-<p>//branch 4</p>
+<pre><code>## [1] 4.0 1.8</code></pre>
+<p>//infeasible branch</p>
 <pre class="r"><code>sp4 &lt;- create.base.lp()
 add.constraint(sp4, c(1,0), &quot;&gt;=&quot;, 4)
-add.constraint(sp4,c(0,1),&quot;&lt;=&quot;,1)
+add.constraint(sp4, c(0,1), &quot;&gt;=&quot;,2)
 solve(sp4)</code></pre>
-<pre><code>## [1] 0</code></pre>
+<pre><code>## [1] 2</code></pre>
 <pre class="r"><code>get.objective(sp4)</code></pre>
-<pre><code>## [1] 40.55556</code></pre>
+<pre><code>## [1] -1e+30</code></pre>
 <pre class="r"><code>get.variables(sp4)</code></pre>
-<pre><code>## [1] 4.444444 1.000000</code></pre>
-<p>//branch 5</p>
+<pre><code>## [1]  0.000000e+00 6.948235e-310</code></pre>
+<p>//branch 4</p>
 <pre class="r"><code>sp5 &lt;- create.base.lp()
-add.constraint(sp5,c(1,0),&quot;&gt;=&quot;,5)
+add.constraint(sp5, c(1,0), &quot;&gt;=&quot;, 4)
 add.constraint(sp5,c(0,1),&quot;&lt;=&quot;,1)
 solve(sp5)</code></pre>
 <pre><code>## [1] 0</code></pre>
 <pre class="r"><code>get.objective(sp5)</code></pre>
-<pre><code>## [1] 40</code></pre>
+<pre><code>## [1] 40.55556</code></pre>
 <pre class="r"><code>get.variables(sp5)</code></pre>
-<pre><code>## [1] 5 0</code></pre>
-<p>//branch 6</p>
+<pre><code>## [1] 4.444444 1.000000</code></pre>
+<p>//branch 5</p>
 <pre class="r"><code>sp6 &lt;- create.base.lp()
-add.constraint(sp6,c(1,0),&quot;=&quot;,4)
+add.constraint(sp6,c(1,0),&quot;&gt;=&quot;,5)
 add.constraint(sp6,c(0,1),&quot;&lt;=&quot;,1)
 solve(sp6)</code></pre>
 <pre><code>## [1] 0</code></pre>
 <pre class="r"><code>get.objective(sp6)</code></pre>
-<pre><code>## [1] 37</code></pre>
+<pre><code>## [1] 40</code></pre>
 <pre class="r"><code>get.variables(sp6)</code></pre>
+<pre><code>## [1] 5 0</code></pre>
+<p>//branch 6</p>
+<pre class="r"><code>sp7 &lt;- create.base.lp()
+add.constraint(sp7,c(1,0),&quot;=&quot;,4)
+add.constraint(sp7,c(0,1),&quot;&lt;=&quot;,1)
+solve(sp7)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>get.objective(sp7)</code></pre>
+<pre><code>## [1] 37</code></pre>
+<pre class="r"><code>get.variables(sp7)</code></pre>
 <pre><code>## [1] 4 1</code></pre>
 <pre class="r"><code>library(&quot;data.tree&quot;)</code></pre>
 <pre class="r"><code>root &lt;- Node$new(&quot;Z = 41.25 [X1 = 3.75, X2 = 2.25]&quot;)

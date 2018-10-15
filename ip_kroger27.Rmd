@@ -22,49 +22,56 @@ solve(sp1)
 get.objective(sp1)
 get.variables(sp1)
 ```
-
 ```{r}
 sp2 <- create.base.lp()
-add.constraint(sp2, c(1,0), ">=", 4)
+add.constraint(sp2, c(0,1), ">=", 3)
 solve(sp2)
 get.objective(sp2)
 get.variables(sp2)
 ```
-//infeasible branch
+
 ```{r}
 sp3 <- create.base.lp()
 add.constraint(sp3, c(1,0), ">=", 4)
-add.constraint(sp3, c(0,1), ">=",2)
 solve(sp3)
 get.objective(sp3)
 get.variables(sp3)
 ```
-//branch 4
+//infeasible branch
 ```{r}
 sp4 <- create.base.lp()
 add.constraint(sp4, c(1,0), ">=", 4)
-add.constraint(sp4,c(0,1),"<=",1)
+add.constraint(sp4, c(0,1), ">=",2)
 solve(sp4)
 get.objective(sp4)
 get.variables(sp4)
 ```
-//branch 5
+//branch 4
 ```{r}
 sp5 <- create.base.lp()
-add.constraint(sp5,c(1,0),">=",5)
+add.constraint(sp5, c(1,0), ">=", 4)
 add.constraint(sp5,c(0,1),"<=",1)
 solve(sp5)
 get.objective(sp5)
 get.variables(sp5)
 ```
-//branch 6
+//branch 5
 ```{r}
 sp6 <- create.base.lp()
-add.constraint(sp6,c(1,0),"=",4)
+add.constraint(sp6,c(1,0),">=",5)
 add.constraint(sp6,c(0,1),"<=",1)
 solve(sp6)
 get.objective(sp6)
 get.variables(sp6)
+```
+//branch 6
+```{r}
+sp7 <- create.base.lp()
+add.constraint(sp7,c(1,0),"=",4)
+add.constraint(sp7,c(0,1),"<=",1)
+solve(sp7)
+get.objective(sp7)
+get.variables(sp7)
 ```
 
 

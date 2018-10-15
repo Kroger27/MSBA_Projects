@@ -78,7 +78,7 @@ get.variables(w)
 ```{r}
 get.constraints(w)
 ```
-
+#Streamlined Procedure
 ```{r}
 library("lpSolveAPI")
 q<- read.lp("inclass5.lp")
