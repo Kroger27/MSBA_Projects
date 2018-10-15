@@ -30,7 +30,7 @@ solve(sp2)
 get.objective(sp2)
 get.variables(sp2)
 ```
-
+//infeasible branch
 ```{r}
 sp3 <- create.base.lp()
 add.constraint(sp3, c(1,0), ">=", 4)
@@ -39,7 +39,7 @@ solve(sp3)
 get.objective(sp3)
 get.variables(sp3)
 ```
-
+//branch 4
 ```{r}
 sp4 <- create.base.lp()
 add.constraint(sp4, c(1,0), ">=", 4)
@@ -48,7 +48,7 @@ solve(sp4)
 get.objective(sp4)
 get.variables(sp4)
 ```
-
+//branch 5
 ```{r}
 sp5 <- create.base.lp()
 add.constraint(sp5,c(1,0),">=",5)
@@ -57,7 +57,7 @@ solve(sp5)
 get.objective(sp5)
 get.variables(sp5)
 ```
-
+//branch 6
 ```{r}
 sp6 <- create.base.lp()
 add.constraint(sp6,c(1,0),"=",4)
@@ -68,8 +68,31 @@ get.variables(sp6)
 ```
 
 
+```{r}
+library("data.tree")
+```
 
+```{r}
+root <- Node$new("Z = 41.25 [X1 = 3.75, X2 = 2.25]")
+  left_1 <- root$AddChild("Branch on X1 <= 3 --> Z = 39 [X1 = 3, X2 = 3]")
+  right_1 <- root$AddChild("*Branch on X1 <= 4 --> Z = 41 [X1 = 4, X2 = 1.88]")
+    left_2 <- right_1$AddChild("*Branch on X1 <= 1 --> Z = 40.56 [X1 = 4.44, X2 = 1]")
+       left_3 <- left_2$AddChild("*Branch on X1 <= 4 --> Z = 37 [X1 = 4, X2 = 1]")
+       right_3 <- left_2$AddChild("*Branch on X1 <= 5 --> Z = 40 [X1 = 5, X2 = 0]")
+    right_2 <- right_1$AddChild("Branch on X2 >= 2 --> Infeasible")
+  
 
+print(root)
+```
 
+```{r}
+ip_df <- data.frame(
+  X=c(3.75,3,4,4.44,4,5),
+  Y=c(2.25, 3, 1.80, 1.00, 1.00, 1.00)
+)
 
+ip_df
+
+esquisser(data = ip_df)
+```
 

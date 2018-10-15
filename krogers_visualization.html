@@ -149,6 +149,7 @@ solve(sp2)</code></pre>
 <pre><code>## [1] 41</code></pre>
 <pre class="r"><code>get.variables(sp2)</code></pre>
 <pre><code>## [1] 4.0 1.8</code></pre>
+<p>//infeasible branch</p>
 <pre class="r"><code>sp3 &lt;- create.base.lp()
 add.constraint(sp3, c(1,0), &quot;&gt;=&quot;, 4)
 add.constraint(sp3, c(0,1), &quot;&gt;=&quot;,2)
@@ -157,7 +158,8 @@ solve(sp3)</code></pre>
 <pre class="r"><code>get.objective(sp3)</code></pre>
 <pre><code>## [1] -1e+30</code></pre>
 <pre class="r"><code>get.variables(sp3)</code></pre>
-<pre><code>## [1]  0.000000e+00 6.937589e-310</code></pre>
+<pre><code>## [1] 0 0</code></pre>
+<p>//branch 4</p>
 <pre class="r"><code>sp4 &lt;- create.base.lp()
 add.constraint(sp4, c(1,0), &quot;&gt;=&quot;, 4)
 add.constraint(sp4,c(0,1),&quot;&lt;=&quot;,1)
@@ -167,6 +169,7 @@ solve(sp4)</code></pre>
 <pre><code>## [1] 40.55556</code></pre>
 <pre class="r"><code>get.variables(sp4)</code></pre>
 <pre><code>## [1] 4.444444 1.000000</code></pre>
+<p>//branch 5</p>
 <pre class="r"><code>sp5 &lt;- create.base.lp()
 add.constraint(sp5,c(1,0),&quot;&gt;=&quot;,5)
 add.constraint(sp5,c(0,1),&quot;&lt;=&quot;,1)
@@ -176,6 +179,7 @@ solve(sp5)</code></pre>
 <pre><code>## [1] 40</code></pre>
 <pre class="r"><code>get.variables(sp5)</code></pre>
 <pre><code>## [1] 5 0</code></pre>
+<p>//branch 6</p>
 <pre class="r"><code>sp6 &lt;- create.base.lp()
 add.constraint(sp6,c(1,0),&quot;=&quot;,4)
 add.constraint(sp6,c(0,1),&quot;&lt;=&quot;,1)
@@ -185,6 +189,25 @@ solve(sp6)</code></pre>
 <pre><code>## [1] 37</code></pre>
 <pre class="r"><code>get.variables(sp6)</code></pre>
 <pre><code>## [1] 4 1</code></pre>
+<pre class="r"><code>library(&quot;data.tree&quot;)</code></pre>
+<pre class="r"><code>root &lt;- Node$new(&quot;Z = 41.25 [X1 = 3.75, X2 = 2.25]&quot;)
+  left_1 &lt;- root$AddChild(&quot;Branch on X1 &lt;= 3 --&gt; Z = 39 [X1 = 3, X2 = 3]&quot;)
+  right_1 &lt;- root$AddChild(&quot;*Branch on X1 &lt;= 4 --&gt; Z = 41 [X1 = 4, X2 = 1.88]&quot;)
+    left_2 &lt;- right_1$AddChild(&quot;*Branch on X1 &lt;= 1 --&gt; Z = 40.56 [X1 = 4.44, X2 = 1]&quot;)
+       left_3 &lt;- left_2$AddChild(&quot;*Branch on X1 &lt;= 4 --&gt; Z = 37 [X1 = 4, X2 = 1]&quot;)
+       right_3 &lt;- left_2$AddChild(&quot;*Branch on X1 &lt;= 5 --&gt; Z = 40 [X1 = 5, X2 = 0]&quot;)
+    right_2 &lt;- right_1$AddChild(&quot;Branch on X2 &gt;= 2 --&gt; Infeasible&quot;)
+  
+
+print(root)</code></pre>
+<pre><code>##                                                      levelName
+## 1 Z = 41.25 [X1 = 3.75, X2 = 2.25]                            
+## 2  ¦--Branch on X1 &lt;= 3 --&gt; Z = 39 [X1 = 3, X2 = 3]           
+## 3  °--*Branch on X1 &lt;= 4 --&gt; Z = 41 [X1 = 4, X2 = 1.88]       
+## 4      ¦--*Branch on X1 &lt;= 1 --&gt; Z = 40.56 [X1 = 4.44, X2 = 1]
+## 5      ¦   ¦--*Branch on X1 &lt;= 4 --&gt; Z = 37 [X1 = 4, X2 = 1]  
+## 6      ¦   °--*Branch on X1 &lt;= 5 --&gt; Z = 40 [X1 = 5, X2 = 0]  
+## 7      °--Branch on X2 &gt;= 2 --&gt; Infeasible</code></pre>
 
 
 
