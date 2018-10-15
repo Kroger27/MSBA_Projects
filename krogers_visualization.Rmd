@@ -1,0 +1,75 @@
+---
+title: "ip_kroger27"
+output: html_document
+---
+```{r}
+library("lpSolveAPI")
+library("magrittr")
+```
+```{r}
+create.base.lp <- function() {
+  make.lp(0, 2) %T>%
+  lp.control(sense = "max") %T>%
+  set.objfn(c(8, 5)) %T>%
+  add.constraint(c(1, 1), "<=", 6) %T>%
+  add.constraint(c(9, 5), "<=", 45)
+}
+```
+
+```{r}
+sp1 <- create.base.lp()
+solve(sp1)
+get.objective(sp1)
+get.variables(sp1)
+```
+
+```{r}
+sp2 <- create.base.lp()
+add.constraint(sp2, c(1,0), ">=", 4)
+solve(sp2)
+get.objective(sp2)
+get.variables(sp2)
+```
+
+```{r}
+sp3 <- create.base.lp()
+add.constraint(sp3, c(1,0), ">=", 4)
+add.constraint(sp3, c(0,1), ">=",2)
+solve(sp3)
+get.objective(sp3)
+get.variables(sp3)
+```
+
+```{r}
+sp4 <- create.base.lp()
+add.constraint(sp4, c(1,0), ">=", 4)
+add.constraint(sp4,c(0,1),"<=",1)
+solve(sp4)
+get.objective(sp4)
+get.variables(sp4)
+```
+
+```{r}
+sp5 <- create.base.lp()
+add.constraint(sp5,c(1,0),">=",5)
+add.constraint(sp5,c(0,1),"<=",1)
+solve(sp5)
+get.objective(sp5)
+get.variables(sp5)
+```
+
+```{r}
+sp6 <- create.base.lp()
+add.constraint(sp6,c(1,0),"=",4)
+add.constraint(sp6,c(0,1),"<=",1)
+solve(sp6)
+get.objective(sp6)
+get.variables(sp6)
+```
+
+
+
+
+
+
+
