@@ -1,0 +1,103 @@
+---
+title: "dea_kroger27"
+output: html_document
+---
+
+```{r}
+library(Benchmarking)
+```
+
+```{r}
+x <- matrix(c(150,400,320,520,350,320, 0.2, 0.7, 1.2, 2.0, 1.2, 0.7),ncol = 2) #enter x values ...inputs
+y <- matrix(c(14000,14000,42000,28000,19000, 14000,3500,21000,10500,42000,25000,15000), ncol= 2)
+x
+colnames(x) <- c("Staff Hours Per Day", "Supplies Per Day")
+x
+y
+colnames(y) <- c("Reimbursed Patient-Days", "Privately Paid Patient-Days") #add coloumns to your table 
+y
+```
+
+#CRS
+```{r}
+a <- dea(x,y,RTS = "crs") #list the optimiztion crs - "constant return to scale""
+                                                #vrs- "variable return to scale"
+a
+peers(a)
+lambda(a)
+```
+
+
+```{r}
+dea.plot(x,y, RTS = "crs")
+```
+
+#FDH
+
+```{r}
+b <- dea(x,y,RTS = "fdh") #list the optimiztion crs - "constant return to scale""
+                                                #vrs- "variable return to scale"
+b
+peers(b)
+lambda(b)
+```
+```{r}
+dea.plot(x,y, RTS = "fdh")
+```
+
+#VRS
+
+```{r}
+c <- dea(x,y,RTS = "vrs") #list the optimiztion crs - "constant return to scale""
+                                                #vrs- "variable return to scale"
+c
+peers(c)
+lambda(c)
+```
+
+```{r}
+dea.plot(x,y, RTS = "vrs")
+```
+
+#DRS
+
+```{r}
+d <- dea(x,y,RTS = "vrs") #list the optimiztion crs - "constant return to scale""
+                                                #vrs- "variable return to scale"
+d
+peers(d)
+lambda(d)
+```
+
+```{r}
+dea.plot(x,y, RTS = "drs")
+```
+
+
+#IRS
+```{r}
+e <- dea(x,y,RTS = "irs") #list the optimiztion crs - "constant return to scale""
+                                                #vrs- "variable return to scale"
+e
+peers(e)
+lambda(e)
+```
+
+
+```{r}
+dea.plot(x,y, RTS = "irs")
+```
+
+#FRH or FDH+
+```{r}
+f <- dea(x,y,RTS = "fdh+") #list the optimiztion crs - "constant return to scale""
+                                                #vrs- "variable return to scale"
+f
+peers(f)
+lambda(f)
+```
+
+```{r}
+dea.plot(x,y, RTS = "fdh+")
+```
+
