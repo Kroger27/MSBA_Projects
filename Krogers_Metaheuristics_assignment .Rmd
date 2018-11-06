@@ -8,6 +8,7 @@ library(ggplot2)
 library(GA)
 ```
 
+#Question 1
 
 ```{r}
 library("quantmod")
@@ -51,14 +52,12 @@ rbind(tickers, round(100 * wstar.GenSA, 2))
 100 * (sum(wstar.GenSA * mu) - mean(mu))
 ```
 
-#Question 1
 
 ```{r}
 gap_2 <- ga( type= "real-valued", fitness = function(w) - obj(w), lower = rep(0,5), upper = rep(1, 5), popSize = 50)
 summary(gap_2)
 plot(gap_2)
 ```
-
 
 
 #Question 2
