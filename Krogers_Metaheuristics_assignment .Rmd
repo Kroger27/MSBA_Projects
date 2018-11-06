@@ -8,60 +8,6 @@ library(ggplot2)
 library(GA)
 ```
 
-```{r}
- fun = function(x,y) { (sin(10*x)*cos(10*y)+2)/sqrt(x^4+y^4+1) } 
- obj = function(z) { -fun(z[1],z[2])}
- lower <- c(-3,-3)
-upper <- c(3,3)
-par <- c(2,2)
-```
-
-```{r}
-x=seq(-3,3,length=50) # tick marks on x axis
-y=seq(-3,3,length=50) # tick marks on y axis; defines grid for... 
-z=outer(x,y,fun) # matrix for plotting -- z vals / height of surface
- persp3D(x, y, z, phi = 0, theta = 45,
-  xlab = "X", ylab = "Y",
-  main = "Surface elevation data",
-  color.palette = bl2gr.colors
-)
-filled.contour(x, y, z, color.palette = bl2gr.colors)
-```
-
-```{r}
-out <- GenSA(par=par,lower=lower,upper=upper,fn=obj)
-out[c("value","par","counts")]
-filled.contour(x, y, z, color.palette = bl2gr.colors, 
-      plot.axes = { axis(1);
-                    axis(2); points(out$par[1],out$par[2],
-                                    cex=2,col="red",lwd=2)}
-)
-```
-
-
-```{r}
- nfun = function(x) {
-   (12*x^5-975*x^4+28000*x^3-345000*x^2+1800000*x)
- }
-ll = c(0)
-ul = c(31)
-
-# Plot the function
-# Note, plotting as a maximization function
-p <- ggplot(data=data.frame(x=0),aes(x=x))
-p + stat_function(fun=nfun) + xlim(0,31)
-```
-
-```{r}
-nfun1 = function(x) { -nfun(x)}
-ll = c(0)
-ul = c(31)
-par = 2
-out1 <- GenSA(par=par,lower=ll,upper=ul,fn=nfun1)
-out1[c("value","par","counts")]
-curve(nfun, from = 0, to = 31, n = 1000)
-points(out1$par[1],-out1$value, col = 2, pch = 19)
-```
 
 ```{r}
 library("quantmod")
@@ -125,6 +71,10 @@ obj = function(z)
 plot(x,y)
 ```
 
+```{r}
+plot(x,y)
+```
+
 
 ```{r}
 ssyy <- sum((y-mean(y)) ^ 2)
@@ -156,7 +106,7 @@ lowerbound <- c(0,0)
 
 ```
 
-Genetic Algorithm
+#Genetic Algorithm
 ```{r}
 ga_lookup <- ga(type = "real-valued", fitness = function(x)- obj(x), lower = lowerbound, upper=upperbound, popSize = 50
               
@@ -189,16 +139,7 @@ summary(gap)
 plot(gap)
 ```
 
-#plotting the regression
-```{r}
-x=seq(0,100, length=50)
-y=seq(100,900, length=50)
-z=outer(x,y,fun)
-persp3D(x,y,z, phi=0, theta=45, xlab= "x", ylab= "y",
-      main = "Optimal Parameters for Regression",
-      color.palette = spectral.colors)
-filled.contour(x,y,z, color.palette = spectral.colors)
-```
+
 
 
 #classwork as at November 5th 2018
